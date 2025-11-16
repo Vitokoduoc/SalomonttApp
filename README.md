@@ -2,7 +2,7 @@
   <img src="https://www.duoc.cl/wp-content/uploads/2022/09/logo-0.png" width="300"/>
 </p>
 
-📘 README – Proyecto Semana 4 (PRY2202)
+ # 📘 README – Proyecto Semana 4 (PRY2202)
 Gestión de Centros de Cultivo con Colecciones
 
 ---
@@ -28,7 +28,7 @@ correspondientes y los organiza en una colección para posteriormente mostrarlos
 
 
 
-📁 Estructura del Proyecto
+## 📁 Estructura del Proyecto
 ```
 📦 src
 │
@@ -51,7 +51,7 @@ correspondientes y los organiza en una colección para posteriormente mostrarlos
 ```
 
 
-🏗 Descripción de las Clases
+## 🏗 Descripción de las Clases
 
 📄 model.CentroCultivo
 Representa cada centro de cultivo.
