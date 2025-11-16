@@ -9,7 +9,7 @@ Gestión de Centros de Cultivo con Colecciones
 
 ## 📌 Descripción del Proyecto
 
-Este proyecto corresponde a la Experiencia de Aprendizaje 2 – Semana 4 del módulo Desarrollo Orientado a Objetos de Duoc UC.
+Este proyecto corresponde a la Experiencia de Aprendizaje 2 – Semana 4 del módulo Desarrollo Orientado a Objetos de Duoc UC.  
 El objetivo es aplicar conceptos fundamentales de la Programación Orientada a Objetos como:
 
 - Encapsulamiento
@@ -218,8 +218,8 @@ classDiagram
 
 ## 👨‍💻 Autor
 
-Víctor Valenzuela Concha
-Estudiante – analista Programador Computacional.
+Víctor Valenzuela Concha  
+Estudiante – analista Programador Computacional.  
 Duoc UC – DOO
 
 
