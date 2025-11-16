@@ -67,7 +67,7 @@ Representa cada centro de cultivo.
     - Getters/setters documentados
     - toString
     - Documentación Javadoc 
-
+___
 📄 model.Producto
 Describe el producto asociado a cada centro.
 
@@ -77,35 +77,23 @@ Describe el producto asociado a cada centro.
     - precioProducto
     - validaciones
     - documentación Javadoc.
-
+___
 📄 data.GestorDatos
-
 Clase encargada de:
-
-Leer el archivo datosCentros.txt
-
-Validar formato (6 columnas)
-
-Crear objetos Producto y CentroCultivo
-
-Almacenarlos en un ArrayList
-
-Manejo de excepciones claras
-
-Evitar NPE mediante validaciones
-
+    - Leer el archivo datosCentros.txt
+    - Validar formato (6 columnas)
+    - Crear objetos Producto y CentroCultivo
+    - Almacenarlos en un ArrayList
+    - Manejo de excepciones claras
+    - Evitar NPE mediante validaciones
+___
 📄 ui.Main
-
 Punto de ejecución del sistema.
-
-Incluye:
-
-Manejo de excepciones en carga de datos
-
-Validación contra null y listas vacías
-
-Impresión en formato tabla, limpia y ordenada
-
-Filtro usando streams
-
-Mensajes profesionales y claros
+  * Incluye:
+    - Manejo de excepciones en carga de datos
+    - Validación contra null y listas vacías
+    - Impresión en formato tabla, limpia y ordenada
+    - Filtro usando streams
+    - Mensajes profesionales y claros
+   
+  * 
