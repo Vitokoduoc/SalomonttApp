@@ -2,12 +2,12 @@
   <img src="https://www.duoc.cl/wp-content/uploads/2022/09/logo-0.png" width="300"/>
 </p>
 
- # 📘 README – Proyecto Semana 4 (PRY2202)
+ # 📘 Proyecto Semana 4 SalmonttApp
 Gestión de Centros de Cultivo con Colecciones
 
 ---
 
-📌 Descripción del Proyecto
+## 📌 Descripción del Proyecto
 
 Este proyecto corresponde a la Experiencia de Aprendizaje 2 – Semana 4 del módulo Desarrollo Orientado a Objetos de Duoc UC.
 El objetivo es aplicar conceptos fundamentales de la Programación Orientada a Objetos como:
