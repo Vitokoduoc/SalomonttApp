@@ -53,8 +53,8 @@ correspondientes y los organiza en una colección para posteriormente mostrarlos
 
 ## 🏗 Descripción de las Clases
 
-📄 model.CentroCultivo
-Representa un centro de producción acuícola.
+📄 model.CentroCultivo  
+Representa un centro de producción acuícola.  
 Atributos:
 * nombreCentro
 * comuna
@@ -69,8 +69,8 @@ Incluye:
   
 ***
 
-📄 model.Producto
-Representa el producto generado por un centro.
+📄 model.Producto  
+Representa el producto generado por un centro.  
 Atributos:
 * nombreProducto
 * tipoProducto
@@ -83,8 +83,8 @@ Incluye:
   
 ***
 
-📄 model.Tour
-Clase independiente que representa un recorrido o actividad planificada.
+📄 model.Tour  
+Clase independiente que representa un recorrido o actividad planificada.  
 Atributos principales:
 * nomRuta: Nombre de la ruta o sector del tour
 * responsable: Persona encargada
@@ -98,7 +98,7 @@ Características:
   
 ***
 
-📄 data.GestorDatos
+📄 data.GestorDatos  
 Clase encargada de:
 * Leer el archivo datosCentros.txt
 * Validar estructura (6 columnas por línea)
@@ -108,7 +108,7 @@ Clase encargada de:
 
 ***
 
-📄 ui.Main – Punto de Entrada
+📄 ui.Main – Punto de Entrada  
 Incluye:
 * Manejo de excepciones al cargar datos
 * Validación contra valores nulos
@@ -119,7 +119,7 @@ Incluye:
 
 ***
 
-## 📄 Formato del Archivo datosCentros.txt
+## 📄 Formato del Archivo datosCentros.txt  
 El archivo en /resources debe contener 6 columnas:
 
 ```
