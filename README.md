@@ -54,46 +54,172 @@ correspondientes y los organiza en una colección para posteriormente mostrarlos
 ## 🏗 Descripción de las Clases
 
 📄 model.CentroCultivo
-Representa cada centro de cultivo.
+Representa un centro de producción acuícola.
+Atributos:
+* nombreCentro
+* comuna
+* produccion
+* producto asociado (composición)
+Incluye:
+* Validacion de datos
+* Constructores seguros
+* Getters/setters
+* Representación en texto mediante toString(
+* documentados Javadoc
+  
+***
 
-* Incluye:
-    - nombreCentro
-    - comuna
-    - produccion
-    - producto (composición obligatoria)
-  * Cuenta con:
-    - Validaciones
-    - Constructores completos
-    - Getters/setters documentados
-    - toString
-    - Documentación Javadoc 
-___
 📄 model.Producto
-Describe el producto asociado a cada centro.
+Representa el producto generado por un centro.
+Atributos:
+* nombreProducto
+* tipoProducto
+* precioProducto
+Incluye:
+* Validación de datos
+* Documentación Javadoc
+* Constructores
+* Representación en texto mediante toString(
+  
+***
 
-* Incluye:
-    - nombreProducto
-    - tipoProducto
-    - precioProducto
-    - validaciones
-    - documentación Javadoc.
-___
+📄 model.Tour
+Clase independiente que representa un recorrido o actividad planificada.
+Atributos principales:
+* nomRuta: Nombre de la ruta o sector del tour
+* responsable: Persona encargada
+* fecha: Fecha del tour
+Características:
+* Constructor vacío y constructor con parámetros
+* Getters y setters con validaciones mínimas
+* Manejo coherente de posibles datos inválidos
+* Documentación Javadoc
+* Representación en texto mediante toString()
+  
+***
+
 📄 data.GestorDatos
 Clase encargada de:
-    - Leer el archivo datosCentros.txt
-    - Validar formato (6 columnas)
-    - Crear objetos Producto y CentroCultivo
-    - Almacenarlos en un ArrayList
-    - Manejo de excepciones claras
-    - Evitar NPE mediante validaciones
-___
-📄 ui.Main
-Punto de ejecución del sistema.
-  * Incluye:
-    - Manejo de excepciones en carga de datos
-    - Validación contra null y listas vacías
-    - Impresión en formato tabla, limpia y ordenada
-    - Filtro usando streams
-    - Mensajes profesionales y claros
-   
-  * 
+* Leer el archivo datosCentros.txt
+* Validar estructura (6 columnas por línea)
+* Crear objetos Producto y CentroCultivo
+* Manejar excepciones en la carga de datos
+* Devolver una lista con los registros válidos
+
+***
+
+📄 ui.Main – Punto de Entrada
+Incluye:
+* Manejo de excepciones al cargar datos
+* Validación contra valores nulos
+* Impresión profesional en formato tabla
+* Filtro con streams
+* Separación de responsabilidades en métodos auxiliares
+* Mensajes claros y estilo profesional
+
+***
+
+##📄 Formato del Archivo datosCentros.txt
+El archivo en /resources debe contener 6 columnas:
+
+```
+nombreCentro;comuna;produccion;nombreProducto;tipoProducto;precioProducto
+
+```
+Ejemplo:
+
+```
+Isla Huar;Calbuco;1200;Salmón Atlántico Premium;Ahumado;8500 
+Chacao Norte;Ancud;980;Trucha Arcoíris;Fresco;6900
+```
+
+
+***
+##🖥 Salida del Programa (Formato Tabla)
+
+```
+====================================================================================================
+                                   LISTA COMPLETA DE CENTROS DE CULTIVO
+====================================================================================================
+CENTRO                | COMUNA        | PRODUCCIÓN | PRODUCTO                    | TIPO       | PRECIO
+----------------------------------------------------------------------------------------------------
+Isla Huar             | Calbuco       | 1200       | Salmón Atlántico Premium    | Ahumado    | 8500.0
+Chacao Norte          | Ancud         | 980        | Trucha Arcoíris             | Fresco     | 6900.0
+...
+
+```
+---
+##📊 Diagrama UML
+
+classDiagram
+    direction LR
+
+    class Producto {
+        - String nombreProducto
+        - String tipoProducto
+        - double precioProducto
+        + Producto()
+        + Producto(nombreProducto, tipoProducto, precioProducto)
+        + getNombreProducto() String
+        + setNombreProducto(nombreProducto String) void
+        + getTipoProducto() String
+        + setTipoProducto(tipoProducto String) void
+        + getPrecioProducto() double
+        + setPrecioProducto(precioProducto double) void
+    }
+
+    class CentroCultivo {
+        - String nombreCentro
+        - String comuna
+        - int produccion
+        - Producto producto
+        + CentroCultivo()
+        + CentroCultivo(nombreCentro String, comuna String, produccion int, producto Producto)
+        + getNombreCentro() String
+        + setNombreCentro(nombreCentro String) void
+        + getComuna() String
+        + setComuna(comuna String) void
+        + getProduccion() int
+        + setProduccion(produccion int) void
+        + getProducto() Producto
+        + setProducto(producto Producto) void
+    }
+
+    class Tour {
+        - String nomRuta
+        - String responsable
+        - String fecha
+        + Tour()
+        + Tour(nomRuta String, responsable String, fecha String)
+        + getNomRuta() String
+        + setNomRuta(nomRuta String) void
+        + getResponsable() String
+        + setResponsable(responsable String) void
+        + getFecha() String
+        + setFecha(fecha String) void
+    }
+
+    class GestorDatos {
+        + cargarDatos(rutaArchivo String) List~CentroCultivo~
+    }
+
+    class Main {
+        + main(args String[]) void
+    }
+
+    %% Relaciones
+    CentroCultivo *-- Producto : composición
+    GestorDatos --> CentroCultivo : crea
+    GestorDatos --> Producto : crea
+    Main --> GestorDatos : usa
+    Main --> CentroCultivo : procesa
+    %% Tour queda independiente por ahora
+
+
+##👨‍💻 Autor
+
+Víctor Valenzuela Concha
+Estudiante – analista Programador Computacional.
+Duoc UC – DOO
+
+
