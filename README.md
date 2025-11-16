@@ -119,7 +119,7 @@ Incluye:
 
 ***
 
-##📄 Formato del Archivo datosCentros.txt
+## 📄 Formato del Archivo datosCentros.txt
 El archivo en /resources debe contener 6 columnas:
 
 ```
@@ -135,7 +135,7 @@ Chacao Norte;Ancud;980;Trucha Arcoíris;Fresco;6900
 
 
 ***
-##🖥 Salida del Programa (Formato Tabla)
+## 🖥 Salida del Programa (Formato Tabla)
 
 ```
 ====================================================================================================
@@ -149,7 +149,7 @@ Chacao Norte          | Ancud         | 980        | Trucha Arcoíris           
 
 ```
 ---
-##📊 Diagrama UML
+## 📊 Diagrama UML
 
 classDiagram
     direction LR
@@ -216,7 +216,7 @@ classDiagram
     %% Tour queda independiente por ahora
 
 
-##👨‍💻 Autor
+## 👨‍💻 Autor
 
 Víctor Valenzuela Concha
 Estudiante – analista Programador Computacional.
