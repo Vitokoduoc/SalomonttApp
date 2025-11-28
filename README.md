@@ -67,6 +67,20 @@ src/
    ```
 5.  La consola mostrará una tabla con las unidades operativas creadas.
 
+## 🖥 Salida del Programa (Formato Tabla)
+
+```
+================== Unidades Operativas ==================
+Nombre             | Comuna     | Producción     |
+==========================================================
+Isla Huar          | Calbuco    | 1200 t         |
+Chacao Norte       | Ancud      | 980 t          |
+Planta Ancud       | Ancud      | 500 t por día  |
+Planta Quellón     | Quellón    | 850 t por día  |
+==========================================================
+
+```
+
 ---
 
 ## ✔ Cumplimiento solicitado
@@ -96,22 +110,6 @@ Este README contiene exactamente lo requerido:
 
 ```
 
-
-
-***
-## 🖥 Salida del Programa (Formato Tabla)
-
-```
-================== Unidades Operativas ==================
-Nombre             | Comuna     | Producción     |
-==========================================================
-Isla Huar          | Calbuco    | 1200 t         |
-Chacao Norte       | Ancud      | 980 t          |
-Planta Ancud       | Ancud      | 500 t por día  |
-Planta Quellón     | Quellón    | 850 t por día  |
-==========================================================
-
-```
 ---
 ## 📊 Diagrama UML
 ```
