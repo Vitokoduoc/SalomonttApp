@@ -83,14 +83,6 @@ Planta Quellón     | Quellón    | 850 t por día  |
 
 ---
 
-## ✔ Cumplimiento solicitado
-Este README contiene exactamente lo requerido:
-- Descripción del objetivo de la semana  
-- Clases creadas  
-- Instrucciones para ejecutar Main  
-
----
-
 ## 📂 Estructura del Proyecto – SalmonttApp
 ```
 📦 SalmonttApp  
