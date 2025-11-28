@@ -2,219 +2,142 @@
   <img src="https://www.duoc.cl/wp-content/uploads/2022/09/logo-0.png" width="300"/>
 </p>
 
- # 📘 Proyecto Semana 4 SalmonttApp
-Gestión de Centros de Cultivo con Colecciones
+# SalmonttApp – Semana 6  
+## Creación de jerarquías con herencia simple
 
 ---
 
-## 📌 Descripción del Proyecto
+## 📌 Descripción de esta semana
 
-Este proyecto corresponde a la Experiencia de Aprendizaje 2 – Semana 4 del módulo Desarrollo Orientado a Objetos de Duoc UC.  
-El objetivo es aplicar conceptos fundamentales de la Programación Orientada a Objetos como:
+El objetivo de esta semana es implementar una jerarquía de clases utilizando **herencia simple**, donde:
 
-- Encapsulamiento
-- Composición
-- Lectura de archivos desde recursos
-- Uso de colecciones (ArrayList)
-- Separación por paquetes
-- Estructura limpia y mantenible
-- Manejo básico de excepciones
-- validaciones 
+- Se define una **superclase** (`UnidadOperativa`) con atributos comunes.
+- Se crean **subclases** (`CentroCultivo` y `PlantaProceso`) que extienden su funcionalidad.
+- Se sobrescriben métodos (`toString()`).
+- Se utiliza `super(...)` en los constructores.
+- Se muestran instancias creadas desde la clase `Main`.
 
-La aplicación carga información de centros de cultivo desde un archivo ubicado en la carpeta resources, crea los objetos
-correspondientes y los organiza en una colección para posteriormente mostrarlos en formato tabular y aplicar filtros.
+Esta estructura permitirá escalar el sistema de unidades operativas de la empresa Salmontt.
+
+---
+## 📦 Clases creadas
+
+### **1. model/UnidadOperativa.java**
+Superclase con los atributos:
+- `nombre`
+- `comuna`
+
+### **2. model/CentroCultivo.java**
+Subclase que agrega:
+- `toneladasProduccion`
+
+Sobrescribe `toString()`.
+
+### **3. model/PlantaProceso.java**
+Subclase que agrega:
+- `capacidadProceso` (t por día)
+
+Sobrescribe `toString()`.
+
+### **4. data/GestorUnidades.java**
+Genera instancias de prueba de las subclases:
+- 2 Centros de Cultivo  
+- 2 Plantas de Proceso  
+
+Devuelve una lista con todas las unidades.
+
+### **5. ui/Main.java**
+Ejecuta el programa e imprime por consola las unidades creadas, utilizando los métodos `toString()` de cada subclase.
 
 ---
 
+## ▶️ Instrucciones para ejecutar `Main`
 
-
-## 📁 Estructura del Proyecto
+1. Abrir el proyecto en IntelliJ IDEA.
+2. Verificar la estructura de paquetes:
 ```
-📦 src
-│
-├── 📁 model
-│     ├── 📄 CentroCultivo.java
-│     ├── 📄 Producto.java
-│     └── 📄 Tour.java
-│
-├── 📁 data
-│     └── 📄 GestorDatos.java
-│
-└── 📁 ui
-      └── 📄 Main.java
-│
-📁 resources
-│     └── 📄 datosCentros.txt
-│
+src/
+├── model/
+├── data/
+└── ui/
+```
+3. Ejecutar la clase:
+   ```
+   ui.Main
+   ```
+5.  La consola mostrará una tabla con las unidades operativas creadas.
+
+---
+
+## ✔ Cumplimiento solicitado
+Este README contiene exactamente lo requerido:
+- Descripción del objetivo de la semana  
+- Clases creadas  
+- Instrucciones para ejecutar Main  
+
+---
+
+## 📂 Estructura del Proyecto – SalmonttApp
+```
+📦 SalmonttApp  
+└── 📁 src  
+    ├── 📁 model  
+    │     ├── 📄 UnidadOperativa.java  
+    │     ├── 📄 CentroCultivo.java  
+    │     └── 📄 PlantaProceso.java  
+    │
+    ├── 📁 data  
+    │     └── 📄 GestorUnidades.java  
+    │
+    └── 📁 ui  
+          └── 📄 Main.java  
+
 📄 README.md
 
 ```
 
-
-## 🏗 Descripción de las Clases
-
-📄 model.CentroCultivo  
-Representa un centro de producción acuícola.  
-Atributos:
-* nombreCentro
-* comuna
-* produccion
-* producto asociado (composición)
-Incluye:
-* Validacion de datos
-* Constructores seguros
-* Getters/setters
-* Representación en texto mediante toString(
-* documentados Javadoc
-  
-***
-
-📄 model.Producto  
-Representa el producto generado por un centro.  
-Atributos:
-* nombreProducto
-* tipoProducto
-* precioProducto
-Incluye:
-* Validación de datos
-* Documentación Javadoc
-* Constructores
-* Representación en texto mediante toString(
-  
-***
-
-📄 model.Tour  
-Clase independiente que representa un recorrido o actividad planificada.  
-Atributos principales:
-* nomRuta: Nombre de la ruta o sector del tour
-* responsable: Persona encargada
-* fecha: Fecha del tour
-Características:
-* Constructor vacío y constructor con parámetros
-* Getters y setters con validaciones mínimas
-* Manejo coherente de posibles datos inválidos
-* Documentación Javadoc
-* Representación en texto mediante toString()
-  
-***
-
-📄 data.GestorDatos  
-Clase encargada de:
-* Leer el archivo datosCentros.txt
-* Validar estructura (6 columnas por línea)
-* Crear objetos Producto y CentroCultivo
-* Manejar excepciones en la carga de datos
-* Devolver una lista con los registros válidos
-
-***
-
-📄 ui.Main – Punto de Entrada  
-Incluye:
-* Manejo de excepciones al cargar datos
-* Validación contra valores nulos
-* Impresión profesional en formato tabla
-* Filtro con streams
-* Separación de responsabilidades en métodos auxiliares
-* Mensajes claros y estilo profesional
-
-***
-
-## 📄 Formato del Archivo datosCentros.txt  
-El archivo en /resources debe contener 6 columnas:
-
-```
-nombreCentro;comuna;produccion;nombreProducto;tipoProducto;precioProducto
-
-```
-Ejemplo:
-
-```
-Isla Huar;Calbuco;1200;Salmón Atlántico Premium;Ahumado;8500 
-Chacao Norte;Ancud;980;Trucha Arcoíris;Fresco;6900
-```
 
 
 ***
 ## 🖥 Salida del Programa (Formato Tabla)
 
 ```
-====================================================================================================
-                                   LISTA COMPLETA DE CENTROS DE CULTIVO
-====================================================================================================
-CENTRO                | COMUNA        | PRODUCCIÓN | PRODUCTO                    | TIPO       | PRECIO
-----------------------------------------------------------------------------------------------------
-Isla Huar             | Calbuco       | 1200       | Salmón Atlántico Premium    | Ahumado    | 8500.0
-Chacao Norte          | Ancud         | 980        | Trucha Arcoíris             | Fresco     | 6900.0
-...
+================== Unidades Operativas ==================
+Nombre             | Comuna     | Producción     |
+==========================================================
+Isla Huar          | Calbuco    | 1200 t         |
+Chacao Norte       | Ancud      | 980 t          |
+Planta Ancud       | Ancud      | 500 t por día  |
+Planta Quellón     | Quellón    | 850 t por día  |
+==========================================================
 
 ```
 ---
 ## 📊 Diagrama UML
-
-classDiagram
-    direction LR
-
-    class Producto {
-        - String nombreProducto
-        - String tipoProducto
-        - double precioProducto
-        + Producto()
-        + Producto(nombreProducto, tipoProducto, precioProducto)
-        + getNombreProducto() String
-        + setNombreProducto(nombreProducto String) void
-        + getTipoProducto() String
-        + setTipoProducto(tipoProducto String) void
-        + getPrecioProducto() double
-        + setPrecioProducto(precioProducto double) void
-    }
-
-    class CentroCultivo {
-        - String nombreCentro
-        - String comuna
-        - int produccion
-        - Producto producto
-        + CentroCultivo()
-        + CentroCultivo(nombreCentro String, comuna String, produccion int, producto Producto)
-        + getNombreCentro() String
-        + setNombreCentro(nombreCentro String) void
-        + getComuna() String
-        + setComuna(comuna String) void
-        + getProduccion() int
-        + setProduccion(produccion int) void
-        + getProducto() Producto
-        + setProducto(producto Producto) void
-    }
-
-    class Tour {
-        - String nomRuta
-        - String responsable
-        - String fecha
-        + Tour()
-        + Tour(nomRuta String, responsable String, fecha String)
-        + getNomRuta() String
-        + setNomRuta(nomRuta String) void
-        + getResponsable() String
-        + setResponsable(responsable String) void
-        + getFecha() String
-        + setFecha(fecha String) void
-    }
-
-    class GestorDatos {
-        + cargarDatos(rutaArchivo String) List~CentroCultivo~
-    }
-
-    class Main {
-        + main(args String[]) void
-    }
-
-    %% Relaciones
-    CentroCultivo *-- Producto : composición
-    GestorDatos --> CentroCultivo : crea
-    GestorDatos --> Producto : crea
-    Main --> GestorDatos : usa
-    Main --> CentroCultivo : procesa
-    %% Tour queda independiente por ahora
-
+```
+                  ┌──────────────────────────┐
+                  │     UnidadOperativa      │
+                  ├──────────────────────────┤
+                  │ - nombre : String        │
+                  │ - comuna : String        │
+                  ├──────────────────────────┤
+                  │ + UnidadOperativa( )     │
+                  │ + getNombre() : String   │
+                  │ + getComuna() : String   │
+                  └───────────▲──────────────┘
+                              │
+              ┌───────────────┴────────────────┐
+              │                                │
+┌──────────────────────────┐     ┌──────────────────────────┐
+│      CentroCultivo       │     │      PlantaProceso       │
+├──────────────────────────┤     ├──────────────────────────┤
+│ - toneladasProduccion: int│     │ - capacidadProceso: int  │
+├──────────────────────────┤     ├──────────────────────────┤
+│ + CentroCultivo( )       │     │ + PlantaProceso( )        │
+│ + getProduccion() : int  │     │ + toString() : String     │
+│ + toString() : String    │     └──────────────────────────┘
+└──────────────────────────┘
+```
 
 ## 👨‍💻 Autor
 
