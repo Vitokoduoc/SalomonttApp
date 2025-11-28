@@ -1,97 +1,63 @@
 package model;
 
 /**
- * Clase que representa un centro de cultivo y sus atributos principales.
- * Cada centro mantiene información relevante como su nombre, comuna,
- * nivel de producción y un producto asociado mediante composición.
+ * Representa un centro de cultivo perteneciente a la empresa.
  *
- * Autor: Víctor Valenzuela
+ * <p>
+ * Esta clase extiende a {@link UnidadOperativa}, heredando atributos
+ * comunes como nombre y comuna. Además, incorpora información específica
+ * de un centro de cultivo, como sus toneladas de producción.
+ * </p>
+ *
+ * <p>
+ * Su propósito es modelar de forma precisa una unidad operativa dedicada
+ * al cultivo, permitiendo diferenciarla de otras unidades como plantas
+ * de proceso en la jerarquía del sistema.
+ * </p>
+ *
  */
-public class CentroCultivo {
+public class CentroCultivo extends UnidadOperativa {
 
 
-    private String nombreCentro;
-    private String comuna;
-    private int produccion;
-    private Producto producto;
+    private int toneladasProduccion;
 
     /**
-     * Constructor vacío para permitir la creación de un objeto sin inicializar.
-     * Los valores podrán ser configurados posteriormente mediante los setters.
-     */
-    public CentroCultivo() {
-    }
-
-    /**
-     * Constructor principal que inicializa los datos fundamentales del centro.
-     * Aplica validaciones mínimas para mantener consistencia,
-     * siguiendo las recomendaciones recibidas durante la asignatura.
+     * Construye un nuevo CentroCultivo utilizando su nombre, comuna
+     * y nivel de producción expresado en toneladas.
      *
-     * @param nombreCentro nombre del centro; no debe estar vacío
-     * @param comuna       comuna donde se ubica; no debe estar vacía
-     * @param produccion   cantidad de producción; no puede ser negativa
-     * @param producto     producto asociado al centro; no puede ser nulo
-     * @throws IllegalArgumentException cuando alguno de los datos no es válido
+     * @param nombre nombre del centro de cultivo
+     * @param comuna comuna donde se ubica el centro
+     * @param toneladasProduccion producción anual del centro en toneladas
      */
-    public CentroCultivo(String nombreCentro, String comuna,Producto producto ,int produccion) {
-        setNombreCentro(nombreCentro);
-        setComuna(comuna);
-        setProducto(producto);
-        setProduccion(produccion);
+    public CentroCultivo(String nombre, String comuna, int toneladasProduccion) {
+        super(nombre, comuna);
+        this.toneladasProduccion = toneladasProduccion;
     }
 
     /**
-     * Getter y Setter de los atributos del centro de cultivo.
+     * Estructuras getter
+     * Obtiene la cantidad de toneladas producidas por el centro de cultivo.
+     * @return toneladas producidas
      */
-    public String getNombreCentro() {
-        return nombreCentro;
-    }
-    public void setNombreCentro(String nombreCentro) {
-        if (nombreCentro == null || nombreCentro.trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre del centro no puede estar vacío.");
-        }
-        this.nombreCentro = nombreCentro.trim();
-    }
-    public String getComuna() {
-        return comuna;
-    }
-    public void setComuna(String comuna) {
-        if (comuna == null || comuna.trim().isEmpty()) {
-            throw new IllegalArgumentException("La comuna no puede estar vacía.");
-        }
-        this.comuna = comuna.trim();
-    }
-    public Producto getProducto() {
-        return producto;
-    }
-    public void setProducto(Producto producto) {
-        if (producto == null) {
-            throw new IllegalArgumentException("El producto asociado no puede ser nulo.");
-        }
-        this.producto = producto;
-    }
     public int getProduccion() {
-        return produccion;
+        return toneladasProduccion;
     }
-    public void setProduccion(int produccion) {
-        if (produccion < 0) {
-            throw new IllegalArgumentException("La producción no puede ser negativa.");
-        }
-        this.produccion = produccion;
-    }
-
 
     /**
-     * Entrega una representación en texto del centro de cultivo,
-     * incluyendo sus atributos y el producto asociado.
+     * Retorna una representación formateada del centro de cultivo.
+     * Este método muestra la información en formato de tabla y aplica
+     * color azul mediante códigos ANSI para destacar visualmente
+     * este tipo de unidad operativa.
      *
-     * @return cadena con los datos estructurados del centro
+     * @return cadena formateada del centro de cultivo
      */
     @Override
     public String toString() {
-        return "CentroCultivo [nombreCentro=" + nombreCentro +
-                ", comuna=" + comuna +
-                ", produccion=" + produccion +
-                ", producto=" + producto + "]";
+        return String.format(
+                "\u001B[34m%-18s | %-10s | %-13s |\u001B[0m",
+                nombre,
+                comuna,
+                toneladasProduccion + " t"
+        );
     }
 }
