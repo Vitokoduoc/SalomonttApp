@@ -121,6 +121,16 @@ ui.Main
 5. La consola mostrará la información de las unidades operativas usando el método mostrarInformacion() de cada subclase.
 
 ---
+## ⚠️ Nota Importante (Paso Opcional – No Evaluado)
+Este paso es opcional, por lo tanto no será evaluado, pero se recomienda para probar el sistema desde un punto de entrada central.  
+Este punto de entrada corresponde a la clase ui.Main, desde donde se instancia el gestor de unidades y se ejecuta el recorrido polimórfico de las unidades operativas.  
+Su uso permite comprobar de forma integrada el correcto funcionamiento de:
+
+1. La jerarquía de herencia.
+2. La sobrescritura de métodos.
+3. El uso de colecciones genéricas.
+4. El polimorfismo.
+---
 ## 🖥 Salida del Programa (Ejemplo)
 
 Nota: El contenido exacto depende de los datos definidos en GestorUnidades, pero el formato es similar al siguiente:
