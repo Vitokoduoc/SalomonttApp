@@ -17,7 +17,6 @@ package model;
  */
 public class UnidadOperativa {
 
-
     protected String nombre;
     protected String comuna;
 
@@ -33,14 +32,28 @@ public class UnidadOperativa {
     }
 
     /**
-     * Estructuras getter
-     * Obtiene el nombre y comuna de la unidad operativa.
-     * @return nombre y comuna de la unidad operativa
+     * Muestra la información básica de la unidad operativa.
+     * Este método puede ser sobrescrito por las subclases para
+     * agregar más detalles específicos.
+     */
+    public void mostrarInformacion() {
+        System.out.println("Unidad Operativa: " + nombre + ", Comuna: " + comuna);
+    }
+
+    /**
+     * Obtiene el nombre de la unidad operativa.
+     *
+     * @return nombre de la unidad operativa
      */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * Obtiene la comuna donde se encuentra la unidad operativa.
+     *
+     * @return comuna de la unidad operativa
+     */
     public String getComuna() {
         return comuna;
     }

@@ -14,10 +14,8 @@ package model;
  * al cultivo, permitiendo diferenciarla de otras unidades como plantas
  * de proceso en la jerarquía del sistema.
  * </p>
- *
  */
 public class CentroCultivo extends UnidadOperativa {
-
 
     private int toneladasProduccion;
 
@@ -35,12 +33,26 @@ public class CentroCultivo extends UnidadOperativa {
     }
 
     /**
-     * Estructuras getter
-     * Obtiene la cantidad de toneladas producidas por el centro de cultivo.
-     * @return toneladas producidas
+     * Obtiene la producción anual del centro de cultivo en toneladas.
+     *
+     * @return producción anual en toneladas
      */
-    public int getProduccion() {
+    public int getToneladasProduccion() {
         return toneladasProduccion;
+    }
+
+    /**
+     * Muestra por consola la información específica del centro de cultivo.
+     * Este método sobrescribe el comportamiento base de {@link UnidadOperativa}
+     * para incluir el dato de producción anual.
+     */
+    @Override
+    public void mostrarInformacion() {
+        System.out.println(
+                "Centro de Cultivo: " + nombre +
+                        ", Comuna: " + comuna +
+                        ", Producción: " + toneladasProduccion + " toneladas"
+        );
     }
 
     /**

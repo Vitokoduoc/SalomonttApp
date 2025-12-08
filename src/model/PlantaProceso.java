@@ -15,16 +15,14 @@ package model;
  * del sistema, permitiendo representar operaciones industriales que
  * procesan la producción obtenida desde los centros de cultivo.
  * </p>
- *
  */
 public class PlantaProceso extends UnidadOperativa {
-
 
     private int capacidadProceso;
 
     /**
-     * Construye una nueva PlantaProceso utilizando su nombre, comuna
-     * y su capacidad de operación expresada en toneladas por día.
+     * Construye una nueva PlantaProceso con nombre, comuna y capacidad
+     * de procesamiento medida en toneladas por día.
      *
      * @param nombre nombre de la planta de proceso
      * @param comuna comuna donde está ubicada la planta
@@ -34,13 +32,28 @@ public class PlantaProceso extends UnidadOperativa {
         super(nombre, comuna);
         this.capacidadProceso = capacidadProceso;
     }
+
     /**
-     * Estructuras getter
      * Obtiene la capacidad diaria de procesamiento de la planta.
+     *
      * @return capacidad de procesamiento en toneladas por día
      */
     public int getCapacidad() {
         return capacidadProceso;
+    }
+
+    /**
+     * Muestra por consola la información específica de la planta de proceso.
+     * Sobrescribe el comportamiento base de {@link UnidadOperativa} para
+     * incluir la capacidad diaria de procesamiento.
+     */
+    @Override
+    public void mostrarInformacion() {
+        System.out.println(
+                "Planta de Proceso: " + nombre +
+                        ", Comuna: " + comuna +
+                        ", Capacidad: " + capacidadProceso + " t por día"
+        );
     }
 
     /**

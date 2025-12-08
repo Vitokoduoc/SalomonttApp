@@ -2,6 +2,8 @@ package data;
 
 import model.CentroCultivo;
 import model.PlantaProceso;
+import model.UnidadOperativa;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,19 +32,19 @@ public class GestorUnidades {
      * incluyendo centros de cultivo y plantas de proceso.
      *
      * <p>
-     * Se generan cuatro objetos como datos de prueba: dos centros de cultivo y
-     * dos plantas de proceso. Esta información permite validar el funcionamiento
-     * de la jerarquía de clases y el método {@code toString()} sobrescrito en
-     * cada subclase.
+     * La colección se declara utilizando el tipo genérico {@code List<UnidadOperativa>},
+     * permitiendo almacenar distintos tipos de subclases en una misma estructura
+     * y recorrerlas de forma polimórfica.
      * </p>
      *
-     * @return lista de objetos que representan unidades operativas
+     * @return lista de unidades operativas de prueba
      */
-    public List<Object> crearUnidades() {
-        List<Object> unidades = new ArrayList<>();
+    public List<UnidadOperativa> crearUnidades() {
+        List<UnidadOperativa> unidades = new ArrayList<>();
 
-        // Crear dos centros de cultivo
-        unidades.add(new CentroCultivo("Isla Huar", "Calbuco", 1200));
+        // Crear tres centros de cultivo
+        unidades.add(new CentroCultivo("Calbuco Norte", "Calbuco", 1200));
+        unidades.add(new CentroCultivo("Isla Huar", "Calbuco", 1100));
         unidades.add(new CentroCultivo("Chacao Norte", "Ancud", 980));
 
         // Crear dos plantas de proceso
