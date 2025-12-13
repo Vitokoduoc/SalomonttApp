@@ -10,12 +10,12 @@ package model;
  * </p>
  *
  * <p>
- * Su propósito es modelar de forma precisa una unidad operativa dedicada
- * al cultivo, permitiendo diferenciarla de otras unidades como plantas
- * de proceso en la jerarquía del sistema.
+ * Implementa la interfaz {@link Registrable} para permitir su gestión
+ * polimórfica dentro de colecciones dinámicas que integran distintas
+ * entidades del sistema.
  * </p>
  */
-public class CentroCultivo extends UnidadOperativa {
+public class CentroCultivo extends UnidadOperativa implements Registrable {
 
     private int toneladasProduccion;
 
@@ -43,8 +43,7 @@ public class CentroCultivo extends UnidadOperativa {
 
     /**
      * Muestra por consola la información específica del centro de cultivo.
-     * Este método sobrescribe el comportamiento base de {@link UnidadOperativa}
-     * para incluir el dato de producción anual.
+     * Sobrescribe el comportamiento base de {@link UnidadOperativa}.
      */
     @Override
     public void mostrarInformacion() {
@@ -56,10 +55,20 @@ public class CentroCultivo extends UnidadOperativa {
     }
 
     /**
+     * Muestra un resumen de la entidad, utilizado en el contexto de la
+     * interfaz Registrable y la colección polimórfica.
+     */
+    @Override
+    public void mostrarResumen() {
+        System.out.println(
+                "[Resumen Centro de Cultivo] " + nombre +
+                        " | Producción: " + toneladasProduccion + " t"
+        );
+    }
+
+    /**
      * Retorna una representación formateada del centro de cultivo.
-     * Este método muestra la información en formato de tabla y aplica
-     * color azul mediante códigos ANSI para destacar visualmente
-     * este tipo de unidad operativa.
+     * Incluye formato visual mediante códigos ANSI.
      *
      * @return cadena formateada del centro de cultivo
      */

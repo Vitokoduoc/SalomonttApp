@@ -6,16 +6,17 @@ package model;
  * <p>
  * Esta clase actúa como superclase para distintos tipos de unidades,
  * tales como {@code CentroCultivo} y {@code PlantaProceso}. Contiene
- * los atributos comunes que comparten todas las unidades operativas,
- * como su nombre y la comuna donde se ubican.
+ * los atributos comunes que comparten todas las unidades operativas:
+ * nombre y comuna.
  * </p>
  *
  * <p>
- * Su propósito es permitir reutilizar atributos comunes en subclases,
- * promoviendo la herencia y la extensibilidad del sistema.
+ * Implementa la interfaz {@link Registrable} para permitir que las
+ * unidades operativas formen parte de colecciones polimórficas que
+ * integran distintas entidades del sistema.
  * </p>
  */
-public class UnidadOperativa {
+public class UnidadOperativa implements Registrable {
 
     protected String nombre;
     protected String comuna;
@@ -33,11 +34,20 @@ public class UnidadOperativa {
 
     /**
      * Muestra la información básica de la unidad operativa.
-     * Este método puede ser sobrescrito por las subclases para
-     * agregar más detalles específicos.
+     * Puede ser sobrescrito por subclases para personalizar la salida.
      */
     public void mostrarInformacion() {
         System.out.println("Unidad Operativa: " + nombre + ", Comuna: " + comuna);
+    }
+
+    /**
+     * Implementación general del resumen para la interfaz Registrable.
+     * Las subclases pueden sobrescribir este método si requieren
+     * mostrar información más específica.
+     */
+    @Override
+    public void mostrarResumen() {
+        System.out.println("[Unidad Operativa] " + nombre + " | Comuna: " + comuna);
     }
 
     /**
@@ -57,5 +67,12 @@ public class UnidadOperativa {
     public String getComuna() {
         return comuna;
     }
-}
 
+    @Override
+    public String toString() {
+        return "UnidadOperativa{" +
+                "nombre='" + nombre + '\'' +
+                ", comuna='" + comuna + '\'' +
+                '}';
+    }
+}

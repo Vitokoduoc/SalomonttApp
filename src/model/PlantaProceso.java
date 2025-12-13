@@ -15,8 +15,13 @@ package model;
  * del sistema, permitiendo representar operaciones industriales que
  * procesan la producción obtenida desde los centros de cultivo.
  * </p>
+ *
+ * <p>
+ * Implementa la interfaz {@link Registrable} para permitir su gestión
+ * polimórfica junto a otras entidades del sistema.
+ * </p>
  */
-public class PlantaProceso extends UnidadOperativa {
+public class PlantaProceso extends UnidadOperativa implements Registrable {
 
     private int capacidadProceso;
 
@@ -53,6 +58,18 @@ public class PlantaProceso extends UnidadOperativa {
                 "Planta de Proceso: " + nombre +
                         ", Comuna: " + comuna +
                         ", Capacidad: " + capacidadProceso + " t por día"
+        );
+    }
+
+    /**
+     * Muestra un resumen de la planta de proceso, utilizado en el contexto
+     * de la interfaz {@link Registrable} y las colecciones polimórficas.
+     */
+    @Override
+    public void mostrarResumen() {
+        System.out.println(
+                "[Resumen Planta] " + nombre +
+                        " | Capacidad: " + capacidadProceso + " t/día"
         );
     }
 
