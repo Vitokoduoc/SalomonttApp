@@ -12,7 +12,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Ventana principal de SalmonttApp para la Semana 8.
+ * Ventana principal de SalmonttApp.
  *
  * Muestra una interfaz gráfica con pestañas (JTabbedPane) para gestionar
  * las distintas entidades que implementan la interfaz Registrable.
@@ -33,7 +33,7 @@ public class Main extends JFrame {
     }
 
     public Main() {
-        super("SalmonttApp - Semana 8");
+        super("SalmonttApp");
 
         this.gestor = new GestorEntidades();
 
@@ -46,7 +46,7 @@ public class Main extends JFrame {
         pestañas.addTab("Colaboradores", crearPanelColaboradores());
         pestañas.addTab("Proveedores", crearPanelProveedores());
         pestañas.addTab("Productos", crearPanelProductos());
-        pestañas.addTab("Resumen / Consola", crearPanelResumen());
+        pestañas.addTab("Resumen", crearPanelResumen());
 
         add(pestañas, BorderLayout.CENTER);
     }
@@ -66,7 +66,7 @@ public class Main extends JFrame {
         btnAgregar.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnAgregar.addActionListener(e -> agregarColaborador());
 
-        JButton btnVerResumen = new JButton("Ver Colaboradores (tabla GUI)");
+        JButton btnVerResumen = new JButton("Ver Colaboradores");
         btnVerResumen.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnVerResumen.addActionListener(e -> mostrarResumenFiltrado(Colaborador.class, "Colaboradores"));
 
@@ -95,7 +95,7 @@ public class Main extends JFrame {
         btnAgregar.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnAgregar.addActionListener(e -> agregarProveedor());
 
-        JButton btnVerResumen = new JButton("Ver Proveedores (tabla GUI)");
+        JButton btnVerResumen = new JButton("Ver Proveedores");
         btnVerResumen.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnVerResumen.addActionListener(e -> mostrarResumenFiltrado(Proveedor.class, "Proveedores"));
 
@@ -124,7 +124,7 @@ public class Main extends JFrame {
         btnAgregar.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnAgregar.addActionListener(e -> agregarProducto());
 
-        JButton btnVerResumen = new JButton("Ver Productos (tabla GUI)");
+        JButton btnVerResumen = new JButton("Ver Productos");
         btnVerResumen.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnVerResumen.addActionListener(e -> mostrarResumenFiltrado(Producto.class, "Productos"));
 
@@ -149,7 +149,7 @@ public class Main extends JFrame {
         JLabel lblInfo = new JLabel("Resumen general y salida por consola");
         lblInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JButton btnResumenGui = new JButton("Ver TODAS las entidades (tabla GUI)");
+        JButton btnResumenGui = new JButton("Ver TODAS las entidades");
         btnResumenGui.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnResumenGui.addActionListener(e -> mostrarResumenGeneralGUI());
 

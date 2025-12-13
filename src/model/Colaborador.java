@@ -63,7 +63,7 @@ public class Colaborador extends Persona implements Registrable {
                 "nombre='" + nombre + '\'' +
                 ", rut='" + rut + '\'' +
                 ", email='" + email + '\'' +
-                ", direccion='" + direccion + '\'' +
+                ", dirección='" + direccion + '\'' +
                 ", unidadOperativa=" + unidadOperativa.getNombre() +
                 ", area='" + area + '\'' +
                 ", cargo='" + cargo + '\'' +
