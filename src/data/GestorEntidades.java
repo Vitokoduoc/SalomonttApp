@@ -1,119 +1,328 @@
 package data;
 
-import model.*;
+import model.interfaces.Registrable;
+import model.interfaces.MetodoPago;
+import model.ordenes.Producto;
+import model.ordenes.OrdenDeCompra;
+import model.persona.Cliente;
+import model.persona.Colaborador;
+import model.persona.Direccion;
+import model.persona.Proveedor;
+import model.persona.Rut;
+import model.unidades.CentroCultivo;
+import model.unidades.PlantaProceso;
+import model.unidades.UnidadOperativa;
+import util.LectorArchivo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Gestiona una colección polimórfica de entidades de la empresa SalmonttApp.
  *
- * <p>
- * Todas las entidades implementan la interfaz {@link Registrable}, lo que
- * permite almacenarlas en una misma colección y diferenciarlas mediante
- * instanceof durante la ejecución.
- * </p>
+ * Autor: Víctor Valenzuela
  */
 public class GestorEntidades {
 
-    private ArrayList<Registrable> entidades;
+    private final List<Registrable> entidades;
 
     /**
-     * Constructor: inicializa la colección dinámica.
+     * Crea un gestor con la lista vacía.
+     * Los datos se cargan explícitamente con cargarDesdeArchivo().
      */
     public GestorEntidades() {
-        entidades = new ArrayList<>();
-        cargarDatosIniciales();
+        this.entidades = new ArrayList<>();
     }
 
     /**
-     * Crea datos de ejemplo para probar el sistema.
+     * Carga todas las entidades desde un archivo de texto.
+     * El formato esperado es el que definiste en data/datos.txt.
+     *
+     * @param ruta ruta del archivo (por ejemplo "src/data/datos.txt")
      */
-    private void cargarDatosIniciales() {
+    public void cargarDesdeArchivo(String ruta) {
+        entidades.clear();
 
-        // Unidades operativas
-        UnidadOperativa cc1 = new CentroCultivo("Calbuco Norte", "Calbuco", 1200);
-        UnidadOperativa cc2 = new CentroCultivo("Isla Huar", "Calbuco", 1100);
-        UnidadOperativa pp1 = new PlantaProceso("Planta Ancud", "Ancud", 500);
+        List<String> lineas = LectorArchivo.leerArchivo(ruta);
 
-        // Colaborador asignado a una unidad operativa
-        Colaborador col1 = new Colaborador(
-                "Juan Pérez",
-                "12.345.678-9",
-                "jperez@empresa.cl",
-                "Av. Los Ríos 123",
-                cc1,
-                "Alimentación",
-                "Operador"
-        );
+        for (String linea : lineas) {
+            if (linea.trim().isEmpty() || linea.trim().startsWith("#")) {
+                continue;
+            }
 
+            String[] partes = linea.split(";");
+            if (partes.length == 0) continue;
 
+            String tipo = partes[0].trim().toUpperCase();
 
-
-        // Proveedor
-        Proveedor prov1 = new Proveedor(
-                "Maersk Logistics",
-                "Transporte Marítimo",
-                "Carlos Soto",
-                "+56 9 7711 3344"
-        );
-
-        // Producto asociado a unidad operativa
-        Producto prod1 = new Producto(
-                "Salmón Atlántico",
-                "Calbuco",
-                "Pez vivo",
-                3200,
-                cc2
-        );
-
-        // Agregar todo a la lista polimórfica
-        entidades.add(cc1);
-        entidades.add(cc2);
-        entidades.add(pp1);
-        entidades.add(col1);
-        entidades.add(prov1);
-        entidades.add(prod1);
+            try {
+                switch (tipo) {
+                    case "CENTRO" -> cargarCentroCultivo(partes);
+                    case "PLANTA" -> cargarPlantaProceso(partes);
+                    case "PROVEEDOR" -> cargarProveedor(partes);
+                    case "COLABORADOR" -> cargarColaborador(partes);
+                    case "CLIENTE" -> cargarCliente(partes);
+                    case "PRODUCTO" -> cargarProducto(partes);
+                    case "COMPRA" -> cargarCompra(partes);
+                    default -> System.out.println("Tipo no reconocido en línea: " + linea);
+                }
+            } catch (Exception e) {
+                System.out.println("Error procesando línea: " + linea + " -> " + e.getMessage());
+            }
+        }
     }
 
-    /**
-     * Devuelve la lista polimórfica de entidades.
-     */
-    public ArrayList<Registrable> getEntidades() {
+    // ==========================
+    //  HELPERS DE CARGA
+    // ==========================
+
+    private void cargarCentroCultivo(String[] partes) {
+        // CENTRO;Calbuco Norte;Calbuco;1200
+        if (partes.length < 4) return;
+        String nombre = partes[1];
+        String comuna = partes[2];
+        int toneladas = Integer.parseInt(partes[3]);
+        CentroCultivo cc = new CentroCultivo(nombre, comuna, toneladas);
+        agregarEntidad(cc);
+    }
+
+    private void cargarPlantaProceso(String[] partes) {
+        // PLANTA;Planta Ancud;Ancud;500
+        if (partes.length < 4) return;
+        String nombre = partes[1];
+        String comuna = partes[2];
+        int capacidad = Integer.parseInt(partes[3]);
+        PlantaProceso pp = new PlantaProceso(nombre, comuna, capacidad);
+        agregarEntidad(pp);
+    }
+
+    private void cargarProveedor(String[] partes) {
+        // PROVEEDOR;Maersk Logistics;Transporte Marítimo;Carlos Soto;+569...
+        if (partes.length < 5) return;
+        String nombreEmpresa = partes[1];
+        String rubro = partes[2];
+        String contacto = partes[3];
+        String telefono = partes[4];
+        Proveedor proveedor = new Proveedor(nombreEmpresa, rubro, contacto, telefono);
+        agregarEntidad(proveedor);
+    }
+
+    private void cargarColaborador(String[] partes) {
+        // COLABORADOR;nombre;rut;email;calle;numero;comunaDir;region;unidadNombre;unidadComuna;area;cargo
+        if (partes.length < 12) return;
+
+        String nombre = partes[1];
+        String rutStr = partes[2];
+        String email = partes[3];
+        String calle = partes[4];
+        String numero = partes[5];
+        String comunaDir = partes[6];
+        String region = partes[7];
+        String unidadNombre = partes[8];
+        String unidadComuna = partes[9];
+        String area = partes[10];
+        String cargo = partes[11];
+
+        Direccion direccion = new Direccion(calle, numero, comunaDir, region);
+        Rut rut = new Rut(rutStr);
+        UnidadOperativa unidad = new UnidadOperativa(unidadNombre, unidadComuna);
+
+        Colaborador colaborador = new Colaborador(
+                nombre,
+                rut,
+                email,
+                direccion,
+                unidad,
+                area,
+                cargo
+        );
+        agregarEntidad(colaborador);
+    }
+
+    private void cargarCliente(String[] partes) {
+        // CLIENTE;idCliente;nombre;rut;email;calle;numero;comuna;region;metodoPago
+        if (partes.length < 10) return;
+
+        String idCliente = partes[1];
+        String nombre = partes[2];
+        String rutStr = partes[3];
+        String email = partes[4];
+        String calle = partes[5];
+        String numero = partes[6];
+        String comuna = partes[7];
+        String region = partes[8];
+        String metodoPagoCodigo = partes[9];
+
+        Direccion direccion = new Direccion(calle, numero, comuna, region);
+        Rut rut = new Rut(rutStr);
+        MetodoPago metodoPago = crearMetodoPagoDesdeCodigo(metodoPagoCodigo);
+
+        Cliente cliente = new Cliente(
+                nombre,
+                rut,
+                email,
+                direccion,
+                idCliente,
+                metodoPago
+        );
+        agregarEntidad(cliente);
+    }
+
+    private void cargarProducto(String[] partes) {
+        // PRODUCTO;nombre;comuna;tipoProducto;cantidad;unidadOrigenNombre;unidadOrigenComuna
+        if (partes.length < 7) return;
+
+        String nombre = partes[1];
+        String comuna = partes[2];
+        String tipoProducto = partes[3];
+        double cantidad = Double.parseDouble(partes[4]);
+        String unidadNombre = partes[5];
+        String unidadComuna = partes[6];
+
+        UnidadOperativa unidadOrigen = new UnidadOperativa(unidadNombre, unidadComuna);
+
+        Producto producto = new Producto(
+                nombre,
+                comuna,
+                tipoProducto,
+                cantidad,
+                unidadOrigen
+        );
+        agregarEntidad(producto);
+    }
+
+    private void cargarCompra(String[] partes) {
+        // COMPRA;idOrden;idCliente;nombreProducto;cantidad;metodoPago;fecha(YYYY-MM-DD)
+        if (partes.length < 7) return;
+
+        String idOrden = partes[1];
+        String idCliente = partes[2];
+        String nombreProducto = partes[3];
+        int cantidad = Integer.parseInt(partes[4]);
+        String metodoPagoCodigo = partes[5];
+        String fechaStr = partes[6];
+
+        Cliente cliente = buscarClientePorId(idCliente);
+        Producto producto = buscarProductoPorNombre(nombreProducto);
+
+        if (cliente == null || producto == null) {
+            System.out.println("No se encontró cliente o producto para la compra " + idOrden);
+            return;
+        }
+
+        MetodoPago metodoPago = crearMetodoPagoDesdeCodigo(metodoPagoCodigo);
+        LocalDate fecha = LocalDate.parse(fechaStr);
+
+        OrdenDeCompra orden = new OrdenDeCompra(
+                idOrden,
+                cliente,
+                producto,
+                cantidad,
+                metodoPago,
+                fecha
+        );
+        agregarEntidad(orden);
+    }
+
+    private MetodoPago crearMetodoPagoDesdeCodigo(String codigo) {
+        if (codigo == null) return new model.pagos.Efectivo();
+
+        String c = codigo.trim().toUpperCase();
+        return switch (c) {
+            case "TARJETA" -> new model.pagos.Tarjeta();
+            case "TRANSFERENCIA" -> new model.pagos.Transferencia();
+            default -> new model.pagos.Efectivo();
+        };
+    }
+
+    private Cliente buscarClientePorId(String idCliente) {
+        for (Registrable r : entidades) {
+            if (r instanceof Cliente c) {
+                if (c.getIdCliente().equalsIgnoreCase(idCliente)) {
+                    return c;
+                }
+            }
+        }
+        return null;
+    }
+
+    private Producto buscarProductoPorNombre(String nombreProducto) {
+        for (Registrable r : entidades) {
+            if (r instanceof Producto p) {
+                if (p.getNombre().equalsIgnoreCase(nombreProducto)) {
+                    return p;
+                }
+            }
+        }
+        return null;
+    }
+
+    // ==========================
+    //  API PÚBLICA
+    // ==========================
+
+    public List<Registrable> getEntidades() {
         return entidades;
     }
 
+    public void agregarEntidad(Registrable entidad) {
+        if (entidad != null) {
+            entidades.add(entidad);
+            // Uso simbólico de registrar() para cumplir con el enunciado
+            entidad.registrar();
+        }
+    }
+
     /**
-     * Recorre la colección y aplica lógica diferenciada según tipo.
+     * Devuelve una lista NUEVA con todas las unidades operativas
+     * ordenadas alfabéticamente por nombre, usando compareTo().
+     */
+    public List<UnidadOperativa> getUnidadesOrdenadas() {
+        List<UnidadOperativa> unidades = new ArrayList<>();
+
+        for (Registrable r : entidades) {
+            if (r instanceof UnidadOperativa uo) {
+                unidades.add(uo);
+            }
+        }
+
+        // Recomendación del profesor: usar Collections.sort()
+        Collections.sort(unidades);
+
+        return unidades;
+    }
+
+    /**
+     * Recorre la colección y aplica lógica diferenciada según tipo usando instanceof.
      */
     public void mostrarDetallesConInstanceof() {
-        System.out.println("=== Detalle de entidades ===");
+        System.out.println("=================================");
+        System.out.println("     DETALLE DE ENTIDADES");
+        System.out.println("=================================");
 
         for (Registrable r : entidades) {
 
             if (r instanceof CentroCultivo) {
-                System.out.println("[Centro de Cultivo detectado]");
-                r.mostrarResumen();
-            }
-            else if (r instanceof PlantaProceso) {
-                System.out.println("[Planta de Proceso detectada]");
-                r.mostrarResumen();
-            }
-            else if (r instanceof Colaborador) {
-                System.out.println("[Colaborador detectado]");
-                r.mostrarResumen();
-            }
-            else if (r instanceof Proveedor) {
-                System.out.println("[Proveedor detectado]");
-                r.mostrarResumen();
-            }
-            else if (r instanceof Producto) {
-                System.out.println("[Producto detectado]");
-                r.mostrarResumen();
-            }
-            else {
+                System.out.println("[Centro de Cultivo]");
+            } else if (r instanceof PlantaProceso) {
+                System.out.println("[Planta de Proceso]");
+            } else if (r instanceof Colaborador) {
+                System.out.println("[Colaborador]");
+            } else if (r instanceof Cliente) {
+                System.out.println("[Cliente]");
+            } else if (r instanceof Proveedor) {
+                System.out.println("[Proveedor]");
+            } else if (r instanceof Producto) {
+                System.out.println("[Producto]");
+            } else if (r instanceof OrdenDeCompra) {
+                System.out.println("[Orden de Compra]");
+            } else {
                 System.out.println("[Entidad desconocida]");
-                r.mostrarResumen();
             }
+
+            r.mostrarDatos();
         }
     }
 }

@@ -1,0 +1,40 @@
+# Archivo de datos de ejemplo para SalmonttApp
+# Formato general: TIPO;campos...
+
+# Centros de cultivo
+CENTRO;Calbuco Norte;Calbuco;1200
+CENTRO;Isla Huar;Calbuco;1100
+CENTRO;Chacao Norte;Ancud;980
+
+# Plantas de proceso
+PLANTA;Planta Ancud;Ancud;500
+PLANTA;Planta Quellón;Quellón;850
+
+# Proveedores
+PROVEEDOR;Maersk Logistics;Transporte Marítimo;Carlos Soto;+56977113344
+PROVEEDOR;AquaFeed Ltda;Alimentos;María López;+56988224455
+PROVEEDOR;FrioSur Servicios;Congelado y frío;Pedro Gómez;+56990001122
+
+# Colaboradores
+# COLABORADOR;nombre;rut;email;calle;numero;comunaDir;region;unidadNombre;unidadComuna;area;cargo
+COLABORADOR;Juan Pérez;12.111.222-3;jperez@empresa.cl;Av. Los Ríos;123;Calbuco;Los Lagos;Calbuco Norte;Calbuco;Alimentación;Operador
+COLABORADOR;María Rojas;16.222.333-4;mrojas@empresa.cl;Calle del Mar;45;Ancud;Los Lagos;Chacao Norte;Ancud;Envasado;Supervisora
+COLABORADOR;Luis Díaz;18.333.444-5;ldiaz@empresa.cl;Ruta Costera;88;Quellón;Los Lagos;Planta Quellón;Quellón;Mantención;Técnico
+
+# Clientes
+# CLIENTE;idCliente;nombre;rut;email;calle;numero;comuna;region;metodoPago(EFECTIVO/TARJETA/TRANSFERENCIA)
+CLIENTE;C001;Exportadora Sur;12.345.678-9;cliente1@exportsur.cl;Av. Principal;101;Puerto Montt;Los Lagos;TARJETA
+CLIENTE;C002;AquaFoods Chile;15.987.654-3;contacto@aqua.cl;Ruta 5 Sur;220;Valdivia;Los Ríos;TRANSFERENCIA
+CLIENTE;C003;Mercado Local Calbuco;9.876.543-2;ventas@mercadocalbuco.cl;Calle Central;33;Calbuco;Los Lagos;EFECTIVO
+
+# Productos
+# PRODUCTO;nombre;comuna;tipoProducto;cantidad;unidadOrigenNombre;unidadOrigenComuna
+PRODUCTO;Salmón Atlántico fresco;Calbuco;Pez vivo;3200;Calbuco Norte;Calbuco
+PRODUCTO;Salmón Congelado Premium;Ancud;Filete congelado;1500;Planta Ancud;Ancud
+PRODUCTO;Trucha Arcoiris;Quellón;Pez vivo;900;Planta Quellón;Quellón
+
+# Compras (Órdenes de compra)
+# COMPRA;idOrden;idCliente;nombreProducto;cantidad;metodoPago(EFECTIVO/TARJETA/TRANSFERENCIA);fecha(YYYY-MM-DD)
+COMPRA;OC-1001;C001;Salmón Atlántico fresco;1000;TARJETA;2025-01-10
+COMPRA;OC-1002;C002;Salmón Congelado Premium;600;TRANSFERENCIA;2025-01-12
+COMPRA;OC-1003;C003;Trucha Arcoiris;200;EFECTIVO;2025-01-15
